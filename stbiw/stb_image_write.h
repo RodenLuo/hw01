@@ -172,8 +172,18 @@ STBIWDEF int stbi_write_png_compression_level;
 STBIWDEF int stbi_write_force_png_filter;
 #endif
 
+#ifdef _WIN_EXPORT
+#ifdef _IMPORTCTRLS 
+   #define _DLL_EXPORT __declspec(dllimport) 
+#else 
+   #define _DLL_EXPORT  __declspec(dllexport) 
+#endif 
+#else
+   #define _DLL_EXPORT
+#endif
+
 #ifndef STBI_WRITE_NO_STDIO
-STBIWDEF __declspec(dllexport) int stbi_write_png(char const *filename, int w, int h, int comp, const void  *data, int stride_in_bytes);
+STBIWDEF _DLL_EXPORT int stbi_write_png(char const *filename, int w, int h, int comp, const void  *data, int stride_in_bytes);
 STBIWDEF int stbi_write_bmp(char const *filename, int w, int h, int comp, const void  *data);
 STBIWDEF int stbi_write_tga(char const *filename, int w, int h, int comp, const void  *data);
 STBIWDEF int stbi_write_hdr(char const *filename, int w, int h, int comp, const float *data);
