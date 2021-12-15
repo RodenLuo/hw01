@@ -1,2 +1,4 @@
-add_library(stbiw STATIC stbiw.cpp)
-target_include_directories(stbiw PUBLIC .)
+add_library(stbiw INTERFACE)
+target_include_directories(stbiw INTERFACE .)
+
+target_compile_definitions(stbiw INTERFACE -DSTB_IMAGE_WRITE_IMPLEMENTATION)
